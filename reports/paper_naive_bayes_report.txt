@@ -8,7 +8,7 @@ Implementation details:
 Differences from the current GaussianNB baseline:
   - Baseline model: sklearn.naive_bayes.GaussianNB
   - Paper-style model: custom Gaussian likelihood using class-specific means and variances, following the methodology described in the paper text.
-  - Baseline predicts on the validation set as a binary classification problem without a separate season-wise winner selection step.
+  - Baseline binary predictions use the model's class threshold; its seasonal accuracy is evaluated separately by selecting the finalist with the highest class-1 probability within each season.
   - Paper-style seasonal evaluation groups by season and selects the finalist with the highest class-1 score among the three finalists.
   - The paper also notes that they suppressed the larger all-player dataset and kept only the top three finalists each season to avoid severe class imbalance.
 

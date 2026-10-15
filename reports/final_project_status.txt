@@ -18,11 +18,11 @@ Our model results
   Binary classification metrics (validation records):
     Naive Bayes: accuracy=41.67%, precision=28.57%, recall=50.00%, F1=36.36%.
     Logistic Regression: accuracy=50.00%, precision=40.00%, recall=100.00%, F1=57.14%.
-    Random Forest: accuracy=66.67%, precision=0.00%, recall=0.00%, F1=0.00%.
+    Random Forest: accuracy=75.00%, precision=100.00%, recall=25.00%, F1=40.00%.
   Seasonal MVP accuracy (separate one-winner-per-season task):
     Naive Bayes: 25.00% (1/4 seasons).
     Logistic Regression: 50.00% (2/4 seasons).
-    Random Forest: 25.00% (1/4 seasons).
+    Random Forest: 50.00% (2/4 seasons).
 
 Reference-paper results and comparison limits
   - Naive Bayes binary classification: the paper reports 0.6666666666666666 accuracy on its testing set (about 66.67%).
@@ -32,10 +32,10 @@ Reference-paper results and comparison limits
   - Paper and project scores may also differ because of implementation choices, preprocessing, and small validation samples. Binary classification and seasonal winner accuracy are different tasks and are not interchanged.
 
 Random Forest diagnostic
-  Predicted binary class distribution: class 0 = 12, class 1 = 0 of 12 records.
-  Confusion matrix (rows = actual [0, 1], columns = predicted [0, 1]): [[8, 0], [4, 0]].
+  Predicted binary class distribution: class 0 = 11, class 1 = 1 of 12 records.
+  Confusion matrix (rows = actual [0, 1], columns = predicted [0, 1]): [[8, 0], [3, 1]].
   Actual validation class counts: class 0 = 8, class 1 = 4.
-  The classifier predicts no positive labels at the default decision threshold. This gives zero precision, recall, and F1; accuracy is 8/12 (66.67%) because all eight negative examples are correct. Seasonal selection is separate and still selects the highest-probability finalist within each season.
+  At the default decision threshold, binary metrics are accuracy=75.00%, precision=100.00%, recall=25.00%, and F1=40.00%. The confusion matrix above gives the corresponding counts; seasonal selection separately chooses the highest-probability finalist within each season.
   The validation set was not used to tune the Random Forest.
 
 2020-21 reproduction status

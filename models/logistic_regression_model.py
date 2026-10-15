@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score, recall_score
@@ -92,8 +93,6 @@ def create_prediction_outputs(
 
 
 def create_seasonal_predictions(validation_df: pd.DataFrame, probabilities: np.ndarray, file_name: str) -> pd.DataFrame:
-    import numpy as np
-
     rows = []
     for season, season_df in validation_df.groupby('Season', sort=True):
         season_df = season_df.sort_values('Player').copy()

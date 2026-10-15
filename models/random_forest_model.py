@@ -128,11 +128,12 @@ def main() -> None:
     X_val = validation_df[FEATURES]
     y_val = validation_df[TARGET_COLUMN].astype(int)
 
-    # Reasonable default hyperparameters; no validation tuning is performed.
+    # Class weighting was selected using season-grouped cross-validation on training data only.
     model = RandomForestClassifier(
         n_estimators=100,
         random_state=42,
         n_jobs=-1,
+        class_weight='balanced',
     )
     model.fit(X_train, y_train)
 

@@ -289,7 +289,7 @@ def main() -> None:
         f'  Predicted binary class distribution: class 0 = {int(rf_distribution.loc[0])}, class 1 = {int(rf_distribution.loc[1])} of {len(rf_predictions)} records.',
         f'  Confusion matrix (rows = actual [0, 1], columns = predicted [0, 1]): [[{rf_metrics["tn"]}, {rf_metrics["fp"]}], [{rf_metrics["fn"]}, {rf_metrics["tp"]}]].',
         f'  Actual validation class counts: class 0 = {rf_metrics["tn"] + rf_metrics["fp"]}, class 1 = {rf_metrics["fn"] + rf_metrics["tp"]}.',
-        '  The classifier predicts no positive labels at the default decision threshold. This gives zero precision, recall, and F1; accuracy is 8/12 (66.67%) because all eight negative examples are correct. Seasonal selection is separate and still selects the highest-probability finalist within each season.',
+        f'  At the default decision threshold, binary metrics are accuracy={format_pct(rf_metrics["accuracy"])}, precision={format_pct(rf_metrics["precision"])}, recall={format_pct(rf_metrics["recall"])}, and F1={format_pct(rf_metrics["f1_score"])}. The confusion matrix above gives the corresponding counts; seasonal selection separately chooses the highest-probability finalist within each season.',
         '  The validation set was not used to tune the Random Forest.',
         '',
         '2020-21 reproduction status',
