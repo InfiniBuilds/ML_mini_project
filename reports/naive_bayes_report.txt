@@ -1,0 +1,37 @@
+Naive Bayes MVP Classification Report
+===================================
+
+Model implementation:
+  Gaussian Naive Bayes (sklearn.naive_bayes.GaussianNB) was used for this baseline.
+  This is a reasonable probabilistic baseline for continuous NBA statistics.
+  It is not necessarily identical to the custom Naive Bayes method described in the original paper unless that exact implementation is available.
+
+Features used:
+  ['G', 'MP', 'FG%', '3P%', 'FT%', 'TRB', 'AST', 'STL', 'BLK', 'PTS']
+
+Training and validation data:
+  Training rows: 48
+  Validation rows: 12
+  Training seasons: ['2000-01', '2001-02', '2002-03', '2003-04', '2004-05', '2005-06', '2006-07', '2007-08', '2008-09', '2009-10', '2010-11', '2011-12', '2012-13', '2013-14', '2014-15', '2015-16']
+  Validation seasons: ['2016-17', '2017-18', '2018-19', '2019-20']
+
+Binary classification metrics:
+  Accuracy: 0.4167
+  Precision: 0.2857
+  Recall: 0.5000
+  F1-score: 0.3636
+  Confusion matrix: TP=2, FP=5, FN=2, TN=3
+
+Seasonal winner prediction:
+  Seasonal accuracy: 0.2500 (1/4)
+
+Reference paper comparison:
+  Paper availability in project: No paper file was found in the project workspace; exact reported values were not verified.
+  The original paper could not be verified from this workspace, so the exact reported paper values were not confirmed here.
+  This report compares the implementation against the stated methodology rather than an unverified paper number.
+
+Implementation notes:
+  - The validation set is small (12 total rows, 4 seasons), so the reported metrics may be unstable.
+  - The model uses the 10 basketball statistics only; Player, Season, and voting columns were excluded.
+  - The seasonal prediction task selects the finalist with the highest class-1 probability within each season.
+  - Because the final prediction season 2020-21 is missing from the source data, only the available validation seasons were evaluated.

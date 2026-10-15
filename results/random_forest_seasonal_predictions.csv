@@ -1,0 +1,5 @@
+Season,Actual_MVP,Predicted_MVP,Correct,Finalist_1_Player,Finalist_1_Probability,Finalist_2_Player,Finalist_2_Probability,Finalist_3_Player,Finalist_3_Probability,Predicted_Probability_MVP
+2016-17,Russell Westbrook,James Harden,0,James Harden,0.43,Kawhi Leonard,0.24,Russell Westbrook,0.43,0.43
+2017-18,James Harden,LeBron James,0,Anthony Davis,0.16,James Harden,0.34,LeBron James,0.44,0.44
+2018-19,Giannis Antetokounmpo,James Harden,0,Giannis Antetokounmpo,0.17,James Harden,0.29,Paul George,0.23,0.29
+2019-20,Giannis Antetokounmpo,Giannis Antetokounmpo,1,Giannis Antetokounmpo,0.41,James Harden,0.35,LeBron James,0.29,0.41

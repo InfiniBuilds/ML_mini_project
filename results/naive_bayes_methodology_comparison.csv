@@ -1,0 +1,3 @@
+model,accuracy,precision,recall,f1_score,seasonal_accuracy,notes
+GaussianNB_baseline,0.4166666666666667,0.2857142857142857,0.5,0.3636363636363636,0.25,sklearn GaussianNB using the direct validation split without custom paper logic
+PaperNaiveBayes_reconstruction,0.4166666666666667,0.2857142857142857,0.5,0.36363636363636365,0.25,Custom Gaussian Naive Bayes approximation based on the paper text and the available project data

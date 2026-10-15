@@ -1,0 +1,9 @@
+metric,value
+accuracy,0.5
+precision,0.4
+recall,1.0
+f1_score,0.5714285714285714
+tn,2.0
+fp,6.0
+fn,0.0
+tp,4.0

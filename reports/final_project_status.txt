@@ -1,0 +1,55 @@
+NBA MVP Prediction - Final Project Status
+=========================================
+
+Completed tasks
+  - Dataset preparation and fixed train/validation split are in place; original data and splits were not modified during this verification.
+  - Naive Bayes, Logistic Regression, and Random Forest model scripts and their saved evaluation outputs were inspected.
+  - A reference-paper comparison was produced at results/reference_comparison.csv from the saved model metrics and seasonal predictions.
+  - Validation checks confirmed common model feature definitions, common train/validation source paths, no target in the feature list, prediction coverage, saved metric consistency, and seasonal winner selection.
+
+Prepared data
+  Training: 48 records across 16 seasons (2000-01 through 2015-16).
+  Validation: 12 records across 4 seasons (2016-17 through 2019-20).
+  Shared features: G, MP, FG%, 3P%, FT%, TRB, AST, STL, BLK, PTS.
+  Each model source uses the same processed train.csv and validation.csv files; model prediction keys and actual labels match all validation records exactly.
+  Input columns are restricted to the ten statistical features. Player and Season are retained only for identifying/grouping predictions; MVP is used only as the target.
+
+Our model results
+  Binary classification metrics (validation records):
+    Naive Bayes: accuracy=41.67%, precision=28.57%, recall=50.00%, F1=36.36%.
+    Logistic Regression: accuracy=50.00%, precision=40.00%, recall=100.00%, F1=57.14%.
+    Random Forest: accuracy=66.67%, precision=0.00%, recall=0.00%, F1=0.00%.
+  Seasonal MVP accuracy (separate one-winner-per-season task):
+    Naive Bayes: 25.00% (1/4 seasons).
+    Logistic Regression: 50.00% (2/4 seasons).
+    Random Forest: 25.00% (1/4 seasons).
+
+Reference-paper results and comparison limits
+  - Naive Bayes binary classification: the paper reports 0.6666666666666666 accuracy on its testing set (about 66.67%).
+  - Logistic Regression binary classification: the paper reports approximately 67% accuracy for pure MVP vs non-MVP classification.
+  - Logistic Regression seasonal selection: the paper reports 50% accuracy when selecting one MVP from three finalists.
+  - Naive Bayes seasonal selection: the paper describes about 66% but also reports two correct and two incorrect seasons. Two of four is 50%, so its reference seasonal result is internally inconsistent; no definitive difference is claimed.
+  - Paper and project scores may also differ because of implementation choices, preprocessing, and small validation samples. Binary classification and seasonal winner accuracy are different tasks and are not interchanged.
+
+Random Forest diagnostic
+  Predicted binary class distribution: class 0 = 12, class 1 = 0 of 12 records.
+  Confusion matrix (rows = actual [0, 1], columns = predicted [0, 1]): [[8, 0], [4, 0]].
+  Actual validation class counts: class 0 = 8, class 1 = 4.
+  The classifier predicts no positive labels at the default decision threshold. This gives zero precision, recall, and F1; accuracy is 8/12 (66.67%) because all eight negative examples are correct. Seasonal selection is separate and still selects the highest-probability finalist within each season.
+  The validation set was not used to tune the Random Forest.
+
+2020-21 reproduction status
+  Raw source contains Year=2021 rows: False.
+  Prepared validation seasons: 2016-17, 2017-18, 2018-19, 2019-20.
+  The raw source has no Year=2021 records and the processed splits stop at 2019-20. The paper's final 2020-21 experiment with Curry, Embiid, and Jokic cannot be reproduced from the current dataset.
+
+Limitations and unresolved issues
+  - Only four seasons (12 finalist records) are in the validation split, so metric estimates are unstable.
+  - The paper is a scanned PDF and describes aspects of its methods incompletely; the exact original implementations cannot be reproduced.
+  - The paper's Naive Bayes seasonal percentage conflicts with its stated season counts.
+  - The paper's final 2020-21 finalist experiment is not reproducible without that season's source records.
+
+Verification scope
+  - This verification read saved predictions and metrics and recalculated binary metrics from the prediction files; it did not retrain or modify any model.
+  - All three model prediction files cover the same 12 validation records with matching actual labels; all saved binary metrics match recalculation.
+  - Each seasonal output contains exactly one selected winner per validation season, and each selected winner has the highest recorded class-1 probability among that season's three finalists.

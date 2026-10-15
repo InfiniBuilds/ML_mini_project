@@ -1,0 +1,35 @@
+Paper Naive Bayes vs. GaussianNB Baseline
+========================================
+
+Implementation details:
+  The paper describes a Gaussian-style Naive Bayes classifier with class-wise averages and a log-likelihood calculation for each feature.
+  The exact variance smoothing, class-prior treatment, and probability threshold are not fully specified in the text, so this is a reasonable reconstruction rather than an exact byte-for-byte reproduction.
+
+Differences from the current GaussianNB baseline:
+  - Baseline model: sklearn.naive_bayes.GaussianNB
+  - Paper-style model: custom Gaussian likelihood using class-specific means and variances, following the methodology described in the paper text.
+  - Baseline predicts on the validation set as a binary classification problem without a separate season-wise winner selection step.
+  - Paper-style seasonal evaluation groups by season and selects the finalist with the highest class-1 score among the three finalists.
+  - The paper also notes that they suppressed the larger all-player dataset and kept only the top three finalists each season to avoid severe class imbalance.
+
+Binary metrics (paper-style model):
+  Accuracy: 0.4167
+  Precision: 0.2857
+  Recall: 0.5000
+  F1-score: 0.3636
+  Confusion matrix: TP=2, FP=5, FN=2, TN=3
+
+Seasonal winner prediction (paper-style model):
+  Seasonal accuracy: 0.2500 (1/4)
+
+Baseline comparison (existing GaussianNB implementation):
+  Accuracy: 0.4167
+  Precision: 0.2857
+  Recall: 0.5000
+  F1-score: 0.3636
+  Seasonal accuracy: 0.2500 (1/4)
+
+Important limitations:
+  - The paper does not specify all implementation details such as the exact variance smoothing constant or the exact probability calibration logic.
+  - The original paper text does not provide enough detail to guarantee an exact byte-for-byte reproduction of its custom Naive Bayes routine.
+  - The training and validation data are the project’s prepared split and were not modified for this comparison.

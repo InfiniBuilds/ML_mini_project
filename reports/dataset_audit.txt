@@ -1,0 +1,247 @@
+NBA MVP Dataset Audit Report
+===========================
+
+1. Original dataset dimensions
+   Rows: 13552
+   Columns: 55
+
+2. Available seasons
+   Unique seasons in source: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000] ... [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
+   Minimum season: 1991
+   Maximum season: 2020
+
+3. Missing-value analysis
+Unnamed: 0      0
+Player          0
+Pos_x           0
+Age_x           0
+Tm              0
+G_x             0
+GS              0
+MP_x            0
+FG              0
+FGA             0
+FG%             0
+3P              0
+3PA             0
+3P%             0
+2P              0
+2PA             0
+2P%             0
+eFG%            0
+FT              0
+FTA             0
+FT%             0
+ORB             0
+DRB             0
+TRB             0
+AST             0
+STL             0
+BLK             0
+TOV             0
+PF              0
+PTS             0
+Year            0
+PER             0
+TS%             0
+3PAr            0
+FTr             0
+ORB%            0
+DRB%            0
+TRB%            0
+AST%            0
+STL%            0
+BLK%            0
+TOV%            0
+USG%            0
+OWS             0
+DWS             0
+WS              0
+WS/48           0
+OBPM            0
+DBPM            0
+BPM             0
+VORP            0
+Pts Won         0
+Pts Max         0
+Share           0
+W/L%          694
+
+4. Duplicate-record analysis
+   Duplicate rows across the entire source file: 0
+   Duplicate player-season combinations: 0
+
+5. Feature mapping
+   Source mapping used for the required statistics:
+   Player: Player
+   Year: Year
+   Share: Share
+   Pts Won: Pts Won
+   Pts Max: Pts Max
+   G: G_x
+   MP: MP_x
+   FG%: FG%
+   3P%: 3P%
+   FT%: FT%
+   TRB: TRB
+   AST: AST
+   STL: STL
+   BLK: BLK
+   PTS: PTS
+
+6. MVP voting information availability
+   Share column discovered: Share
+   Pts Won column discovered: Pts Won
+   Pts Max column discovered: Pts Max
+
+7. Number of finalists selected per season
+   1990-91: 3
+   1991-92: 3
+   1992-93: 3
+   1993-94: 3
+   1994-95: 3
+   1995-96: 3
+   1996-97: 3
+   1997-98: 3
+   1998-99: 3
+   1999-00: 3
+   2000-01: 3
+   2001-02: 3
+   2002-03: 3
+   2003-04: 3
+   2004-05: 3
+   2005-06: 3
+   2006-07: 3
+   2007-08: 3
+   2008-09: 3
+   2009-10: 3
+   2010-11: 3
+   2011-12: 3
+   2012-13: 3
+   2013-14: 3
+   2014-15: 3
+   2015-16: 3
+   2016-17: 3
+   2017-18: 3
+   2018-19: 3
+   2019-20: 3
+
+8. Seasons with fewer or more than three valid finalists
+   No seasons with fewer or more than three valid finalist records were found.
+
+9. Number of records in each processed dataset
+   nba_mvp_finalists.csv: 90
+   train.csv: 48
+   validation.csv: 12
+   final_prediction.csv: 0
+
+10. Reference paper period reconstruction
+   Training seasons 2000-01 through 2015-16 are available: True
+   Validation seasons 2016-17 through 2019-20 are available: True
+   Final prediction season 2020-21 is available: False
+
+11. Limitations that prevent exact reproduction
+   The source file does not contain a 2020-21 season row, so the final prediction dataset cannot be created without fabrication.
+   The source records use season-end year integers rather than the paper’s 2000-01 notation, so they were normalized to that format for audit and split generation.
+   This dataset appears to be a multi-year player-season table that includes players with one row per season, which is consistent with the project but must be checked before any downstream modeling.
+
+12. Preprocessing decisions made
+   - The original CSV was located and copied into the project data/raw directory without modifying the original file.
+   - Required player, season, voting, and stat columns were mapped to their source names after inspection.
+   - MVP finalists were selected as the top three players by Share within each season.
+   - The winner was assigned as the single player with rank 1 in each season.
+   - Seasons were encoded as labels like 2000-01 to match the reference paper notation.
+   - No missing feature values were imputed and no duplicate rows were removed because the dataset was already clean for this task.
+
+Audit table for finalist selection
+ Season                Player  MVP voting share  Voting points  Voting points max  Selected finalist rank  Winner
+1990-91        Michael Jordan             0.928          891.0              960.0                       1       1
+1990-91         Magic Johnson             0.518          497.0              960.0                       2       0
+1990-91        David Robinson             0.496          476.0              960.0                       3       0
+1991-92        Michael Jordan             0.938          900.0              960.0                       1       1
+1991-92         Clyde Drexler             0.584          561.0              960.0                       2       0
+1991-92        David Robinson             0.351          337.0              960.0                       3       0
+1992-93       Charles Barkley             0.852          835.0              980.0                       1       1
+1992-93       Hakeem Olajuwon             0.660          647.0              980.0                       2       0
+1992-93        Michael Jordan             0.577          565.0              980.0                       3       0
+1993-94       Hakeem Olajuwon             0.880          889.0             1010.0                       1       1
+1993-94        David Robinson             0.723          730.0             1010.0                       2       0
+1993-94        Scottie Pippen             0.386          390.0             1010.0                       3       0
+1994-95        David Robinson             0.858          901.0             1050.0                       1       1
+1994-95      Shaquille O'Neal             0.576          605.0             1050.0                       2       0
+1994-95           Karl Malone             0.507          532.0             1050.0                       3       0
+1995-96        Michael Jordan             0.986         1114.0             1130.0                       1       1
+1995-96        David Robinson             0.508          574.0             1130.0                       2       0
+1995-96     Anfernee Hardaway             0.319          360.0             1130.0                       3       0
+1996-97           Karl Malone             0.857          986.0             1150.0                       1       1
+1996-97        Michael Jordan             0.832          957.0             1150.0                       2       0
+1996-97            Grant Hill             0.327          376.0             1150.0                       3       0
+1997-98        Michael Jordan             0.934         1084.0             1160.0                       1       1
+1997-98           Karl Malone             0.726          842.0             1160.0                       2       0
+1997-98           Gary Payton             0.372          431.0             1160.0                       3       0
+1998-99           Karl Malone             0.701          827.0             1180.0                       1       1
+1998-99       Alonzo Mourning             0.655          773.0             1180.0                       2       0
+1998-99            Tim Duncan             0.627          740.0             1180.0                       3       0
+1999-00      Shaquille O'Neal             0.998         1207.0             1210.0                       1       1
+1999-00         Kevin Garnett             0.337          408.0             1210.0                       2       0
+1999-00       Alonzo Mourning             0.303          367.0             1210.0                       3       0
+2000-01         Allen Iverson             0.904         1121.0             1240.0                       1       1
+2000-01            Tim Duncan             0.569          706.0             1240.0                       2       0
+2000-01      Shaquille O'Neal             0.466          578.0             1240.0                       3       0
+2001-02            Tim Duncan             0.757          954.0             1260.0                       1       1
+2001-02            Jason Kidd             0.712          897.0             1260.0                       2       0
+2001-02      Shaquille O'Neal             0.552          696.0             1260.0                       3       0
+2002-03            Tim Duncan             0.808          962.0             1190.0                       1       1
+2002-03         Kevin Garnett             0.732          871.0             1190.0                       2       0
+2002-03           Kobe Bryant             0.417          496.0             1190.0                       3       0
+2003-04         Kevin Garnett             0.991         1219.0             1230.0                       1       1
+2003-04            Tim Duncan             0.582          716.0             1230.0                       2       0
+2003-04       Jermaine O'Neal             0.425          523.0             1230.0                       3       0
+2004-05            Steve Nash             0.839         1066.0             1270.0                       1       1
+2004-05      Shaquille O'Neal             0.813         1032.0             1270.0                       2       0
+2004-05         Dirk Nowitzki             0.275          349.0             1270.0                       3       0
+2005-06            Steve Nash             0.739          924.0             1250.0                       1       1
+2005-06          LeBron James             0.550          688.0             1250.0                       2       0
+2005-06         Dirk Nowitzki             0.435          544.0             1250.0                       3       0
+2006-07         Dirk Nowitzki             0.882         1138.0             1290.0                       1       1
+2006-07            Steve Nash             0.785         1013.0             1290.0                       2       0
+2006-07           Kobe Bryant             0.404          521.0             1290.0                       3       0
+2007-08           Kobe Bryant             0.873         1100.0             1260.0                       1       1
+2007-08            Chris Paul             0.710          894.0             1260.0                       2       0
+2007-08         Kevin Garnett             0.532          670.0             1260.0                       3       0
+2008-09          LeBron James             0.969         1172.0             1210.0                       1       1
+2008-09           Kobe Bryant             0.577          698.0             1210.0                       2       0
+2008-09           Dwyane Wade             0.562          680.0             1210.0                       3       0
+2009-10          LeBron James             0.980         1205.0             1230.0                       1       1
+2009-10          Kevin Durant             0.495          609.0             1230.0                       2       0
+2009-10           Kobe Bryant             0.487          599.0             1230.0                       3       0
+2010-11          Derrick Rose             0.977         1182.0             1210.0                       1       1
+2010-11         Dwight Howard             0.531          643.0             1210.0                       2       0
+2010-11          LeBron James             0.431          522.0             1210.0                       3       0
+2011-12          LeBron James             0.888         1074.0             1210.0                       1       1
+2011-12          Kevin Durant             0.735          889.0             1210.0                       2       0
+2011-12            Chris Paul             0.318          385.0             1210.0                       3       0
+2012-13          LeBron James             0.998         1207.0             1210.0                       1       1
+2012-13          Kevin Durant             0.632          765.0             1210.0                       2       0
+2012-13       Carmelo Anthony             0.393          475.0             1210.0                       3       0
+2013-14          Kevin Durant             0.986         1232.0             1250.0                       1       1
+2013-14          LeBron James             0.713          891.0             1250.0                       2       0
+2013-14         Blake Griffin             0.347          434.0             1250.0                       3       0
+2014-15         Stephen Curry             0.922         1198.0             1300.0                       1       1
+2014-15          James Harden             0.720          936.0             1300.0                       2       0
+2014-15          LeBron James             0.425          552.0             1300.0                       3       0
+2015-16         Stephen Curry             1.000         1310.0             1310.0                       1       1
+2015-16         Kawhi Leonard             0.484          634.0             1310.0                       2       0
+2015-16          LeBron James             0.482          631.0             1310.0                       3       0
+2016-17     Russell Westbrook             0.879          888.0             1010.0                       1       1
+2016-17          James Harden             0.746          753.0             1010.0                       2       0
+2016-17         Kawhi Leonard             0.495          500.0             1010.0                       3       0
+2017-18          James Harden             0.955          965.0             1010.0                       1       1
+2017-18          LeBron James             0.731          738.0             1010.0                       2       0
+2017-18         Anthony Davis             0.441          445.0             1010.0                       3       0
+2018-19 Giannis Antetokounmpo             0.932          941.0             1010.0                       1       1
+2018-19          James Harden             0.768          776.0             1010.0                       2       0
+2018-19           Paul George             0.352          356.0             1010.0                       3       0
+2019-20 Giannis Antetokounmpo             0.952          962.0             1010.0                       1       1
+2019-20          LeBron James             0.746          753.0             1010.0                       2       0
+2019-20          James Harden             0.363          367.0             1010.0                       3       0
